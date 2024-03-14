@@ -89,9 +89,7 @@ const getReviewsByMovieId = async (req, res) => {
         const { movieId } = req.params;
         const reviews = await Review.find({ movieId: movieId });
         if (!reviews.length) {
-            return res
-                .status(404)
-                .json({ error: "No reviews found for this movie" });
+            return res.json([]);
         }
         res.json(reviews);
     } catch (error) {
