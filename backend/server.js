@@ -1,7 +1,7 @@
 const express = require("express");
 
-// const movieRoutes = require("./routes/movieRoutes");
-// const reviewRoutes = require("./routes/reviewRoutes");
+const movieRoutes = require("./routes/movieRoutes");
+const reviewRoutes = require("./routes/reviewRoutes");
 const connectDb = require("./connectDb.js");
 
 const app = express();
@@ -15,8 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-// app.use("/movies", movieRoutes);
-// app.use("/reviews", reviewRoutes);
+app.use("/movies", movieRoutes);
+app.use("/reviews", reviewRoutes);
 
 // Start the server
 app.listen(PORT, () => {
