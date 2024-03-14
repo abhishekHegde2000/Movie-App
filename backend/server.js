@@ -3,6 +3,7 @@ const express = require("express");
 const movieRoutes = require("./routes/movieRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const connectDb = require("./connectDb.js");
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +14,7 @@ connectDb();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Routes
 app.use("/movies", movieRoutes);

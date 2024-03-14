@@ -11,6 +11,7 @@
     "author": "Abhishek Hegde",
     "license": "ISC",
     "dependencies": {
+        "cors": "^2.8.5",
         "dotenv": "^16.4.5",
         "express": "^4.18.3",
         "http-status": "^1.7.4",
