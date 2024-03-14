@@ -1,5 +1,5 @@
 const Movie = require("../models/Movie");
-// const Review = require("../models/Review");
+const Review = require("../models/Review");
 
 // Get all movies
 const getAllMovies = async (req, res) => {
@@ -56,7 +56,6 @@ const updateMovie = async (req, res) => {
     }
 };
 
-// Delete a movie by ID
 const deleteMovie = async (req, res) => {
     const { id } = req.params;
     try {
@@ -64,7 +63,11 @@ const deleteMovie = async (req, res) => {
         if (!movie) {
             return res.status(404).json({ error: "Movie not found" });
         }
-        // await Review.deleteMany({ movieId: id });
+        console.log(`Movie: ${movie.name} deleted successfully`);
+
+        // Delete associated reviews before deleting the movie (pre-deletion hook)
+        await Review.deleteMany({ movieId: id });
+
         res.json({ message: `Movie: ${movie.name} deleted successfully` });
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });
