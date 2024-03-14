@@ -11,10 +11,11 @@ const Movie = () => {
     useEffect(() => {
         const fetchMovieAndReviews = async () => {
             try {
-                // const movie = await movieService.getMovieById(id);
-                // setMovie(movie);
+                const movie = await movieService.getMovieById(id);
+                console.log(movie);
+                setMovie(movie);
 
-                const reviews = await reviewService.getReviewById(id);
+                const reviews = await reviewService.getReviewsByMovieId(id);
                 console.log(reviews);
                 setReviews(reviews);
             } catch (error) {

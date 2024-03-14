@@ -11,20 +11,6 @@ const getAllMovies = async (req, res) => {
     }
 };
 
-// Get a movie by ID
-const getMovieById = async (req, res) => {
-    const { id } = req.params;
-    try {
-        const movie = await Movie.findById(id);
-        if (!movie) {
-            return res.status(404).json({ error: "Movie not found" });
-        }
-        res.json(movie);
-    } catch (error) {
-        res.status(500).json({ error: "Internal server error" });
-    }
-};
-
 // Create a new movie
 const createMovie = async (req, res) => {
     const { name, releaseDate } = req.body;
@@ -69,6 +55,20 @@ const deleteMovie = async (req, res) => {
         await Review.deleteMany({ movieId: id });
 
         res.json({ message: `Movie: ${movie.name} deleted successfully` });
+    } catch (error) {
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+// Get a movie by ID
+const getMovieById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const movie = await Movie.findById(id);
+        if (!movie) {
+            return res.status(404).json({ error: "Movie not found" });
+        }
+        res.json(movie);
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });
     }

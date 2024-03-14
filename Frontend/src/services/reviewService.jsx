@@ -1,11 +1,11 @@
 import axios from "axios";
 import { API_URL } from "../constants.jsx";
 
-const getReviewById = async (id) => {
+const getReviewsByMovieId = async (id) => {
     try {
-        const response = await axios.get(`${API_URL}/reviews/${id}`);
-        console.log(response);
-        return response;
+        const response = await axios.get(`${API_URL}/movies/${id}/reviews`);
+
+        return response.data;
     } catch (error) {
         console.error(error);
         throw error;
@@ -13,5 +13,5 @@ const getReviewById = async (id) => {
 };
 
 export default {
-    getReviewById,
+    getReviewsByMovieId,
 };

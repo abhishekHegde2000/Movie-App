@@ -84,6 +84,21 @@ getReviewById = async (req, res) => {
     }
 };
 
+const getReviewsByMovieId = async (req, res) => {
+    try {
+        const { movieId } = req.params;
+        const reviews = await Review.find({ movieId: movieId });
+        if (!reviews.length) {
+            return res
+                .status(404)
+                .json({ error: "No reviews found for this movie" });
+        }
+        res.json(reviews);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to get reviews" });
+    }
+};
+
 module.exports = {
     createReview,
     getReview,
@@ -91,4 +106,5 @@ module.exports = {
     deleteReview,
     getAllReviews,
     getReviewById,
+    getReviewsByMovieId,
 };
