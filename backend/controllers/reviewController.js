@@ -2,8 +2,9 @@ const Review = require("../models/Review");
 
 const createReview = async (req, res) => {
     try {
-        const { movieId, reviewerName, rating, comments } = req.body;
-        const review = new Review({
+        const movieId = req.params.movieId;
+        const { reviewerName, rating, comments } = req.body;
+        const review = await new Review({
             movieId,
             reviewerName,
             rating,

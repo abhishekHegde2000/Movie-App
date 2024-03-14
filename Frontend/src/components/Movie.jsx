@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import movieService from "../services/movieService";
 import reviewService from "../services/reviewService";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Movie = () => {
     const { id } = useParams();
@@ -23,26 +24,50 @@ const Movie = () => {
         fetchMovieAndReviews();
     }, [id]);
 
+    const handleDelete = async (review_id) => {
+        try {
+            await reviewService.deleteReview(review_id);
+            const reviews = await reviewService.getReviewsByMovieId(id);
+            setReviews(reviews);
+        } catch (error) {
+            console.error("Error deleting review:", error);
+        }
+    };
+
     return (
-        <div className="container mx-auto px-4">
-            <h1 className="text-4xl font-bold mb-8">{movie?.name}</h1>
-            <p className="text-xl">{movie?.releaseDate}</p>
-            <p>{movie?.averageRating}</p>
-            <div className="mt-8">
-                {reviews &&
-                    reviews.length > 0 &&
-                    reviews.map((review) => (
-                        <div
-                            key={review?._id}
-                            className="bg-white rounded overflow-hidden shadow-lg p-4 mb-4"
-                        >
-                            <h2 className="font-bold text-lg mb-2">
-                                {review?.reviewerName}
-                            </h2>
-                            <p>Rating: {review.rating}</p>
-                            <p>{review?.comments}</p>
-                        </div>
-                    ))}
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+            <div className="bg-white rounded-lg overflow-hidden shadow-lg transform transition-all duration-500 w-full max-w-md p-8">
+                <h1 className="text-4xl font-bold mb-4">{movie?.name}</h1>
+                <p className="mb-2">Release Date: {movie?.releaseDate}</p>
+                <p className="mb-4">Average Rating: {movie?.averageRating}</p>
+                <Link
+                    to={`/movies/${id}/reviews/add`}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300 mb-4"
+                >
+                    Add Review
+                </Link>
+                <div>
+                    {reviews &&
+                        reviews.length > 0 &&
+                        reviews.map((review) => (
+                            <div
+                                key={review?._id}
+                                className="border-t border-gray-200 pt-4"
+                            >
+                                <h2 className="text-2xl font-bold mb-2">
+                                    {review?.reviewerName}
+                                </h2>
+                                <p className="mb-2">Rating: {review.rating}</p>
+                                <p className="mb-2">{review?.comments}</p>
+                                <button
+                                    onClick={() => handleDelete(review._id)}
+                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        ))}
+                </div>
             </div>
         </div>
     );

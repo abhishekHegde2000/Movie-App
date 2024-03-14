@@ -49,7 +49,6 @@ const deleteMovie = async (req, res) => {
         if (!movie) {
             return res.status(404).json({ error: "Movie not found" });
         }
-        console.log(`Movie: ${movie.name} deleted successfully`);
 
         // Delete associated reviews before deleting the movie (pre-deletion hook)
         await Review.deleteMany({ movieId: id });

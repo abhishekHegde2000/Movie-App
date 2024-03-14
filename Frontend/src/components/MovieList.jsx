@@ -27,31 +27,39 @@ const MovieList = () => {
             console.error("Error deleting movie:", error);
         }
     };
-
     return (
-        <div className="container mx-auto px-4">
-            <h1 className="text-4xl font-bold mb-8">Movie List</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="container mx-auto px-4 py-8">
+            <div className="flex items-center justify-between mb-8">
+                <h1 className="text-3xl font-bold text-center">Movie List</h1>
+                <Link to="/add-movie">
+                    <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Add Movie
+                    </button>
+                </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {movies.map((movie) => (
                     <div
                         key={movie._id}
-                        className="bg-white rounded overflow-hidden shadow-lg"
+                        className="bg-white rounded-lg overflow-hidden shadow-lg"
                     >
-                        <div className="px-6 py-4">
-                            <div className="font-bold text-xl mb-2">
+                        <div className="p-4">
+                            <h2 className="text-xl font-bold mb-2">
                                 <Link
                                     to={`/movies/${movie._id}`}
-                                    className="hover:text-blue-500"
+                                    className="hover:underline"
                                 >
                                     {movie.name}
                                 </Link>
+                            </h2>
+                            <div className="flex justify-between items-center">
+                                <button
+                                    onClick={() => deleteMovie(movie._id)}
+                                    className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                >
+                                    Delete
+                                </button>
                             </div>
-                            <button
-                                onClick={() => deleteMovie(movie._id)}
-                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                            >
-                                Delete
-                            </button>
                         </div>
                     </div>
                 ))}

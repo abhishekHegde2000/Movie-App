@@ -11,6 +11,32 @@ const getReviewsByMovieId = async (id) => {
     }
 };
 
+const createReview = async (movieId, review) => {
+    try {
+        const response = await axios.post(
+            `${API_URL}/movies/${movieId}/reviews`,
+            review
+        );
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
+
+const deleteReview = async (id) => {
+    try {
+        const response = await axios.delete(`${API_URL}/reviews/${id}`);
+        console.log(response);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
+
 export default {
     getReviewsByMovieId,
+    createReview,
+    deleteReview,
 };
