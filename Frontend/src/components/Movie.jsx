@@ -38,8 +38,13 @@ const Movie = () => {
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
             <div className="bg-white rounded-lg overflow-hidden shadow-lg transform transition-all duration-500 w-full max-w-md p-8">
                 <h1 className="text-4xl font-bold mb-4">{movie?.name}</h1>
-                <p className="mb-2">Release Date: {movie?.releaseDate}</p>
-                <p className="mb-4">Average Rating: {movie?.averageRating}</p>
+                <p className="mb-4">
+                    Release Date:{" "}
+                    {new Date(movie?.releaseDate).toLocaleDateString() || "N/A"}
+                </p>
+                {/* <p className="mb-4">
+                    Average Rating: {movie?.averageRating || 8}
+                </p> */}
                 <Link
                     to={`/movies/${id}/reviews/add`}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300 mb-4"
