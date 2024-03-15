@@ -1,8 +1,26 @@
-# React + Vite
+# Movie App Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for the Movie App. It's built with React, React Router, and Axios.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+-   Node.js
+-   npm
+
+### Installing
+
+1. Clone the repository: `git clone https://github.com/yourusername/movie-app-frontend.git`
+2. Navigate into the project directory: `cd movie-app-frontend`
+3. Install the dependencies: `npm install`
+
+### Configuration
+
+This project uses environment variables for configuration. These are stored in a `.env` file in the `src` directory. You'll need to create this file and add the following variables:
+
+```env
+API_URL=http://localhost:3000/
+```
